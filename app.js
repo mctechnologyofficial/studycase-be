@@ -1,34 +1,45 @@
-const express = require("express")
-const cors = require("cors")
-let app = express()
-let bodyParser = require('body-parser')
+const express = require("express");
+const cors = require("cors");
+let app = express();
+let bodyParser = require("body-parser");
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(
+  cors({
+    origin: "*",
+  })
+);    
+app.use(express.static("public"));
 
-require('dotenv').config()
-require('./app/routes/routes')(app)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-var corsOptions = {
-  origin: "http://localhost:3000"
-}
+require("dotenv").config();
+require("./app/routes/routes")(app);
 
-app.use(cors(corsOptions))
+// var corsOptions = {
+//   origin: true,
+//   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+//   preflightContinue: false,
+//   optionsSuccessStatus: 204,
+// };
 
 app.get("/", (req, res) => {
-  res.json({ message: "Application is running." })
+  res.json({ message: "Application is running." });
 });
 
-const model = require("./app/models")
-model.sequelize.sync().then(() => {
-  console.log("Database connection established.")
-}).catch((err) => {
-  console.log("Failed to connect db : " + err.message)
-})
+const model = require("./app/models");
+model.sequelize
+  .sync()
+  .then(() => {
+    console.log("Database connection established.");
+  })
+  .catch((err) => {
+    console.log("Failed to connect db : " + err.message);
+  });
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}.`)
+  console.log(`Server is running on port ${port}.`);
 });
