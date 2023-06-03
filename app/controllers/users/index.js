@@ -8,9 +8,7 @@ usersController.storeUsers = async (req, res) => {
         res.status(200).send({
             status: 200,
             message: "User berhasil ditambahkan",
-            data: {
-                users: result
-            }
+            users: result
         })
     } catch (error) {
         console.log(error.message)
@@ -26,9 +24,7 @@ usersController.getAllUsers = async(req, res) => {
 
         res.status(200).send({
             status: 200,
-            data: {
-                users: result
-            }
+            users: result
         })
     } catch (error) {
         console.log(error.message)
@@ -45,9 +41,7 @@ usersController.getSpecifiedUser = async(req, res) => {
 
         res.status(200).send({
             status: 200,
-            data: {
-                users: result
-            }
+            users: result
         })
     } catch (error) {
         console.log(error.message)
@@ -65,9 +59,7 @@ usersController.updateUsers = async(req, res) => {
         res.status(200).send({
             status: 200,
             message: "User berhasil diupdate.",
-            data: {
-                users: result
-            }
+            users: result
         })
     } catch (error) {
         console.log(error.message)

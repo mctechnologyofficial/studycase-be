@@ -7,7 +7,8 @@ app.use(
   cors({
     origin: "*",
   })
-);    
+);  
+  
 app.use(express.static("public"));
 
 app.use(bodyParser.json());
@@ -17,13 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 
 require("dotenv").config();
 require("./app/routes/routes")(app);
-
-// var corsOptions = {
-//   origin: true,
-//   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-//   preflightContinue: false,
-//   optionsSuccessStatus: 204,
-// };
 
 app.get("/", (req, res) => {
   res.json({ message: "Application is running." });
